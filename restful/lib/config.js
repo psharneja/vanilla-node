@@ -11,7 +11,8 @@ environment.staging = {
     'httpPort': 3000,
     'envName': 'staging',
     'httpsPort': '3001',
-    'hashingSecret': 'thisIsASecret'
+    'hashingSecret': 'thisIsASecret',
+    'maxChecks': 5
 
 };
 
@@ -22,7 +23,9 @@ environment.production = {
     'httpPort': 5000,
     'envName': 'production',
     'httpsPort': 5001,
-    'hashingSecret': 'thisIsASecret'
+    'hashingSecret': 'thisIsASecret',
+    'maxChecks': 5
+
 
 };
 
