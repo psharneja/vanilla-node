@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "f2d071a7-77fb-4abf-8e24-9380f49512ad",
+		"name": "restful-node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer {{ADMIN_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text"
+					},
+					{
+						"key": "fizz",
+						"value": "buzz",
+						"type": "text"
+					},
+					{
+						"key": "apples",
+						"value": "oranges",
+						"type": "text"
+					},
+					{
+						"key": "red",
+						"value": "blue",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"john\",\n\t\"lastName\": \"smith\",\n\t\"phone\": \"5555555555\",\n\t\"password\": \"thisisapassword\",\n\t\"tosAgreement\" : true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer {{ADMIN_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text"
+					},
+					{
+						"key": "fizz",
+						"value": "buzz",
+						"type": "text"
+					},
+					{
+						"key": "apples",
+						"value": "oranges",
+						"type": "text"
+					},
+					{
+						"key": "red",
+						"value": "blue",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"phone\": \"5555555555\",\n\t\"password\": \"thisisapassword\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer {{ADMIN_TOKEN}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "fizz",
+						"value": "buzz",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apples",
+						"value": "oranges",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "red",
+						"value": "blue",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "token",
+						"value": "8e0ul2s1elxxzxc2gpqe",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\t\"protocol\": \"https\",\n\t\"url\": \"yahoo.com\",\n\t\"method\": \"put\",\n\t\"successCodes\": [202, 201, 403],\n\t\"timeoutSeconds\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checks?id=sq4118ugcj0jqx8xmmg0",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer {{ADMIN_TOKEN}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "fizz",
+						"value": "buzz",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apples",
+						"value": "oranges",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "red",
+						"value": "blue",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "token",
+						"value": "8e0ul2s1elxxzxc2gpqe",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\t\"id\" : \"sq4118ugcj0jqx8xmmg0\",\n\t\"protocol\": \"https\",\n\t\"url\": \"yahoo.com\",\n\t\"method\": \"put\",\n\t\"successCodes\": [201, 403],\n\t\"timeoutSeconds\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checks?id=sq4118ugcj0jqx8xmmg0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checks"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "sq4118ugcj0jqx8xmmg0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checks?id=sq4118ugcj0jqx8xmmg0",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer {{ADMIN_TOKEN}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "fizz",
+						"value": "buzz",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apples",
+						"value": "oranges",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "red",
+						"value": "blue",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "token",
+						"value": "8e0ul2s1elxxzxc2gpqe",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/checks?id=sq4118ugcj0jqx8xmmg0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checks"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "sq4118ugcj0jqx8xmmg0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/users?phone=5555555555",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "8e0ul2s1elxxzxc2gpqe",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users?phone=5555555555",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "5555555555"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

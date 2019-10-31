@@ -515,9 +515,11 @@ handlers._checks.post = function(data, callback) {
                                 userPhone: userPhone,
                                 url: url,
                                 method: method,
+                                protocol: protocol,
                                 successCodes: successCodes,
                                 timeoutSeconds: timeoutSeconds
                             };
+
 
                             // save object
                             _data.create("checks", checkId, checkObject, function(err) {
