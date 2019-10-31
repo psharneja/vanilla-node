@@ -38,7 +38,7 @@ server.httpsServerOptions = {
     cert: fs.readFileSync(path.join(__dirname, "/../https/cert.pem"))
 };
 server.httpsServer = https.createServer(server.httpsServerOptions, function(req, res) {
-    unifiedServer(req, res);
+    server.unifiedServer(req, res);
 });
 
 
