@@ -9,32 +9,95 @@ var config = require("./config");
 //define the handlers
 var handlers = {};
 
-
-
 /**
- * 
+ *
  * HTML HANDLERS SECTION
  */
 handlers.index = function(data, callback) {
     //reject request that isn't GET
-    if (data.method == 'get') {
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "This is the title",
+            "head.description": "This is the meta description",
+            "body.title": "Hello templated world!",
+            "body.class": "index"
+        };
+
         //read in a template as a string
-        helpers.getTemplate('index', function(err, str) {
+        helpers.getTemplate("index", templateData, function(err, str) {
             if (!err && str) {
-                callback(200, str, 'html');
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
             } else {
-                callback(500, undefined, 'html');
+                callback(500, undefined, "html");
             }
         });
-
     } else {
-        callback(405, undefined, 'html');
+        callback(405, undefined, "html");
+    }
+};
+
+//favicon hjandler
+handlers.favicon = function(data, callback) {
+    if (data.method == "get") {
+        //read in the favicons data
+        helpers.getStaticAsset("favicon.ico", function(err, data) {
+            if (!err && data) {
+                //callnback the data
+                callback(200, data, "favicon");
+            } else {
+                callback(500);
+            }
+        });
+    } else {
+        callback(405);
+    }
+};
+
+
+//public assets
+handlers.public = function(data, callback) {
+    if (data.method == 'get') {
+        var trimmedAssetName = data.trimmedPath.replace('public/', '').trim();
+        if (trimmedAssetName.length > 0) {
+            helpers.getStaticAsset(trimmedAssetName, function(err, data) {
+                if (!err && data) {
+                    //determine the content type and default to plain text
+                    var contentType = 'plain';
+                    if (trimmedAssetName.indexOf('.css') > -1) {
+                        contentType = 'css';
+                    }
+                    if (trimmedAssetName.indexOf('.png') > -1) {
+                        contentType = 'png';
+                    }
+                    if (trimmedAssetName.indexOf('.jpg') > -1) {
+                        contentType = 'jpg';
+                    }
+                    if (trimmedAssetName.indexOf('.ico') > -1) {
+                        contentType = 'favicon';
+                    }
+
+                    // Callback the data
+                    callback(200, data, contentType);
+                } else {
+                    callback(404);
+                }
+            })
+        }
+
     }
 }
 
-
 /**
- * 
+ *
  * Everything below is JSON API HANDLER
  */
 // users
@@ -262,7 +325,7 @@ handlers._users.delete = function(data, callback) {
                                     //loop through checks
                                     userChecks.forEach(function(checkId) {
                                         //delete one check
-                                        _data.delete('checks', checkId, function(err) {
+                                        _data.delete("checks", checkId, function(err) {
                                             if (err) {
                                                 deletionErrors = true;
                                             } else {
@@ -270,12 +333,18 @@ handlers._users.delete = function(data, callback) {
                                                 if (checksDeleted == checksToDelete) {
                                                     if (!deletionErrors) {
                                                         callback(200);
-                                                    } else { callback(500, { 'Err': 'errors encountered while attempting to delete users checks' }) };
+                                                    } else {
+                                                        callback(500, {
+                                                            Err: "errors encountered while attempting to delete users checks"
+                                                        });
+                                                    }
                                                 }
                                             }
-                                        })
-                                    })
-                                } else { callback(200); }
+                                        });
+                                    });
+                                } else {
+                                    callback(200);
+                                }
                             } else {
                                 callback(500, { Err: "could not delete specified user" });
                             }
@@ -548,7 +617,6 @@ handlers._checks.post = function(data, callback) {
                                 timeoutSeconds: timeoutSeconds
                             };
 
-
                             // save object
                             _data.create("checks", checkId, checkObject, function(err) {
                                 if (!err) {
@@ -760,16 +828,22 @@ handlers._checks.delete = function(data, callback) {
                                             userChecks.splice(checkPosition, 1);
 
                                             // resave the user data
-                                            _data.update('users', checkData.userPhone, userData, function(err) {
-                                                if (!err) {
-                                                    callback(200);
-                                                } else {
-                                                    callback(500, { 'Err': 'could not update the user' });
+                                            _data.update(
+                                                "users",
+                                                checkData.userPhone,
+                                                userData,
+                                                function(err) {
+                                                    if (!err) {
+                                                        callback(200);
+                                                    } else {
+                                                        callback(500, { Err: "could not update the user" });
+                                                    }
                                                 }
-                                            })
-
+                                            );
                                         } else {
-                                            callback(500, { 'Error': 'could not find the check on the users object so could not remove it' })
+                                            callback(500, {
+                                                Error: "could not find the check on the users object so could not remove it"
+                                            });
                                         }
                                     } else {
                                         callback(500, {
