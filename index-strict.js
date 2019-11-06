@@ -1,3 +1,4 @@
+"use strict"; 
 /**
  *
  * Primary file for API
@@ -13,9 +14,10 @@ var cli = require('./lib/cli');
 
 // declare the app
 var app = {};
-
+//declare a global that strict mode should catch
+foo='bar';
 // initialization method
-app.init = function (callback) {
+app.init = function() {
     //start servwer
     server.init();
 
@@ -23,18 +25,14 @@ app.init = function (callback) {
     workers.init();
 
     //start cli, but make sure it starts last
-    setTimeout(function () {
+    setTimeout(function() {
         cli.init();
-        callback();
-    }, 50)
+    },50)
 
 };
 
-//slef envoking only if required directly
-if (require.main === module) {
-    app.init(function () { });
-
-}
+//exec method
+app.init();
 
 
 //export app
