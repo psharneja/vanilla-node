@@ -15,7 +15,7 @@ var cli = require('./lib/cli');
 var app = {};
 
 // initialization method
-app.init = function() {
+app.init = function (callback) {
     //start servwer
     server.init();
 
@@ -23,14 +23,18 @@ app.init = function() {
     workers.init();
 
     //start cli, but make sure it starts last
-    setTimeout(function() {
+    setTimeout(function () {
         cli.init();
-    },50)
+        callback();
+    }, 50)
 
 };
 
-//exec method
-app.init();
+//slef envoking only if required directly
+if (require.main === module) {
+    app.init(function () { });
+
+}
 
 
 //export app
