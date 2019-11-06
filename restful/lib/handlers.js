@@ -13,7 +13,7 @@ var handlers = {};
  *
  * HTML HANDLERS SECTION
  */
-handlers.index = function(data, callback) {
+handlers.index = function (data, callback) {
     //reject request that isn't GET
     if (data.method == "get") {
         //prepare data for interpolation
@@ -24,10 +24,10 @@ handlers.index = function(data, callback) {
         };
 
         //read in a template as a string
-        helpers.getTemplate("index", templateData, function(err, str) {
+        helpers.getTemplate("index", templateData, function (err, str) {
             if (!err && str) {
                 //add the universal header n footer
-                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
                     if (!err && str) {
                         //return as html
                         callback(200, str, "html");
@@ -44,7 +44,7 @@ handlers.index = function(data, callback) {
     }
 };
 
-handlers.accountCreate = function(data, callback) {
+handlers.accountCreate = function (data, callback) {
     //reject request that isn't GET
     if (data.method == "get") {
         //prepare data for interpolation
@@ -55,10 +55,10 @@ handlers.accountCreate = function(data, callback) {
         };
 
         //read in a template as a string
-        helpers.getTemplate("accountCreate", templateData, function(err, str) {
+        helpers.getTemplate("accountCreate", templateData, function (err, str) {
             if (!err && str) {
                 //add the universal header n footer
-                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
                     if (!err && str) {
                         //return as html
                         callback(200, str, "html");
@@ -75,7 +75,7 @@ handlers.accountCreate = function(data, callback) {
     }
 }
 
-handlers.sessionCreate = function(data, callback) {
+handlers.sessionCreate = function (data, callback) {
     //reject request that isn't GET
     if (data.method == "get") {
         //prepare data for interpolation
@@ -86,10 +86,10 @@ handlers.sessionCreate = function(data, callback) {
         };
 
         //read in a template as a string
-        helpers.getTemplate("sessionCreate", templateData, function(err, str) {
+        helpers.getTemplate("sessionCreate", templateData, function (err, str) {
             if (!err && str) {
                 //add the universal header n footer
-                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
                     if (!err && str) {
                         //return as html
                         callback(200, str, "html");
@@ -106,103 +106,195 @@ handlers.sessionCreate = function(data, callback) {
     }
 }
 
-handlers.sessionDeleted = function(data, callback) {
-        //reject request that isn't GET
-        if (data.method == "get") {
-            //prepare data for interpolation
-            var templateData = {
-                "head.title": "Logged Out",
-                "head.description": "youve been logged out of your account",
-                "body.class": "sessionDeleted"
-            };
+handlers.sessionDeleted = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Logged Out",
+            "head.description": "youve been logged out of your account",
+            "body.class": "sessionDeleted"
+        };
 
-            //read in a template as a string
-            helpers.getTemplate("sessionDeleted", templateData, function(err, str) {
-                if (!err && str) {
-                    //add the universal header n footer
-                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
-                        if (!err && str) {
-                            //return as html
-                            callback(200, str, "html");
-                        } else {
-                            callback(500, undefined, "html");
-                        }
-                    });
-                } else {
-                    callback(500, undefined, "html");
-                }
-            });
-        } else {
-            callback(405, undefined, "html");
-        }
+        //read in a template as a string
+        helpers.getTemplate("sessionDeleted", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
     }
+}
 //edit account
-    handlers.accountEdit = function(data, callback) {
-        //reject request that isn't GET
-        if (data.method == "get") {
-            //prepare data for interpolation
-            var templateData = {
-                "head.title": "Account Settings",
-                "body.class": "accountEdit"
-            };
+handlers.accountEdit = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Account Settings",
+            "body.class": "accountEdit"
+        };
 
-            //read in a template as a string
-            helpers.getTemplate("accountEdit", templateData, function(err, str) {
-                if (!err && str) {
-                    //add the universal header n footer
-                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
-                        if (!err && str) {
-                            //return as html
-                            callback(200, str, "html");
-                        } else {
-                            callback(500, undefined, "html");
-                        }
-                    });
-                } else {
-                    callback(500, undefined, "html");
-                }
-            });
-        } else {
-            callback(405, undefined, "html");
-        }
+        //read in a template as a string
+        helpers.getTemplate("accountEdit", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
     }
+}
 
-    //deleted account redirect to this page
-    handlers.accountDeleted = function(data, callback) {
-        //reject request that isn't GET
-        if (data.method == "get") {
-            //prepare data for interpolation
-            var templateData = {
-                "head.title": "Account Deleted",
-                "jhead.description": "Your account has been deleted",
-                "body.class": "accountDeleted"
-            };
+//deleted account redirect to this page
+handlers.accountDeleted = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Account Deleted",
+            "jhead.description": "Your account has been deleted",
+            "body.class": "accountDeleted"
+        };
 
-            //read in a template as a string
-            helpers.getTemplate("accountDeleted", templateData, function(err, str) {
-                if (!err && str) {
-                    //add the universal header n footer
-                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
-                        if (!err && str) {
-                            //return as html
-                            callback(200, str, "html");
-                        } else {
-                            callback(500, undefined, "html");
-                        }
-                    });
-                } else {
-                    callback(500, undefined, "html");
-                }
-            });
-        } else {
-            callback(405, undefined, "html");
-        }
+        //read in a template as a string
+        helpers.getTemplate("accountDeleted", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
     }
-    //favicon hjandler
-handlers.favicon = function(data, callback) {
+}
+//create  new check
+handlers.checksCreate = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Create a new check",
+            "body.class": "checksCreate"
+        };
+
+        //read in a template as a string
+        helpers.getTemplate("checksCreate", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
+    }
+}
+
+//dashboard
+handlers.checksList = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Dashboard",
+            "body.class": "checksList"
+        };
+
+        //read in a template as a string
+        helpers.getTemplate("checksList", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
+    }
+}
+
+//checksEdit
+handlers.checksEdit = function (data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Check Details",
+            "body.class": "checksEdit"
+        };
+
+        //read in a template as a string
+        helpers.getTemplate("checksEdit", templateData, function (err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function (err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
+    }
+}
+//favicon hjandler
+handlers.favicon = function (data, callback) {
     if (data.method == "get") {
         //read in the favicons data
-        helpers.getStaticAsset("favicon.ico", function(err, data) {
+        helpers.getStaticAsset("favicon.ico", function (err, data) {
             if (!err && data) {
                 //callnback the data
                 callback(200, data, "favicon");
@@ -217,11 +309,11 @@ handlers.favicon = function(data, callback) {
 
 
 //public assets
-handlers.public = function(data, callback) {
+handlers.public = function (data, callback) {
     if (data.method == 'get') {
         var trimmedAssetName = data.trimmedPath.replace('public/', '').trim();
         if (trimmedAssetName.length > 0) {
-            helpers.getStaticAsset(trimmedAssetName, function(err, data) {
+            helpers.getStaticAsset(trimmedAssetName, function (err, data) {
                 if (!err && data) {
                     //determine the content type and default to plain text
                     var contentType = 'plain';
@@ -254,7 +346,7 @@ handlers.public = function(data, callback) {
  * Everything below is JSON API HANDLER
  */
 // users
-handlers.users = function(data, callback) {
+handlers.users = function (data, callback) {
     var acceptableMethods = ["post", "get", "put", "delete"];
     if (acceptableMethods.indexOf(data.method) > -1) {
         handlers._users[data.method](data, callback);
@@ -269,37 +361,37 @@ handlers._users = {};
 // Users - post
 // required data: firstName, lastName,phone,password, tosAgreement
 // optional data:none
-handlers._users.post = function(data, callback) {
+handlers._users.post = function (data, callback) {
     // check that all required fields are filler out
     var firstName =
         typeof data.payload.firstName == "string" &&
-        data.payload.firstName.trim().length > 0 ?
-        data.payload.firstName.trim() :
-        false;
+            data.payload.firstName.trim().length > 0 ?
+            data.payload.firstName.trim() :
+            false;
     var lastName =
         typeof data.payload.lastName == "string" &&
-        data.payload.lastName.trim().length > 0 ?
-        data.payload.lastName.trim() :
-        false;
+            data.payload.lastName.trim().length > 0 ?
+            data.payload.lastName.trim() :
+            false;
     var phone =
         typeof data.payload.phone == "string" &&
-        data.payload.phone.trim().length == 10 ?
-        data.payload.phone.trim() :
-        false;
+            data.payload.phone.trim().length == 10 ?
+            data.payload.phone.trim() :
+            false;
     var password =
         typeof data.payload.password == "string" &&
-        data.payload.password.trim().length > 0 ?
-        data.payload.password.trim() :
-        false;
+            data.payload.password.trim().length > 0 ?
+            data.payload.password.trim() :
+            false;
     var tosAgreement =
         typeof data.payload.tosAgreement == "boolean" &&
-        data.payload.tosAgreement == true ?
-        true :
-        false;
+            data.payload.tosAgreement == true ?
+            true :
+            false;
 
     if (firstName && lastName && phone && password && tosAgreement) {
         // make sure that user doesnt exist
-        _data.read("users", phone, function(err, data) {
+        _data.read("users", phone, function (err, data) {
             if (err) {
                 // hash the password
                 var hashedPassword = helpers.hash(password);
@@ -313,7 +405,7 @@ handlers._users.post = function(data, callback) {
                         tosAgreement: true
                     };
                     // store the user
-                    _data.create("users", phone, userObject, function(err) {
+                    _data.create("users", phone, userObject, function (err) {
                         if (!err) {
                             callback(200);
                         } else {
@@ -337,22 +429,22 @@ handlers._users.post = function(data, callback) {
 // Users - get
 // required data: phone
 // optional data: none
-handlers._users.get = function(data, callback) {
+handlers._users.get = function (data, callback) {
     // check that the provided phoneno is valid
     var phone =
         typeof data.queryStringObject.phone == "string" &&
-        data.queryStringObject.phone.trim().length == 10 ?
-        data.queryStringObject.phone.trim() :
-        false;
+            data.queryStringObject.phone.trim().length == 10 ?
+            data.queryStringObject.phone.trim() :
+            false;
     if (phone) {
         // get token  from the header
         var token =
             typeof data.headers.token == "string" ? data.headers.token : false;
         // verify given token is valid for phone#
-        handlers._tokens.verifyToken(token, phone, function(tokenIsValid) {
+        handlers._tokens.verifyToken(token, phone, function (tokenIsValid) {
             if (tokenIsValid) {
                 // lookup the user
-                _data.read("users", phone, function(err, data) {
+                _data.read("users", phone, function (err, data) {
                     if (!err && data) {
                         //  Remove the hashed password from the user object b4 return the response
                         delete data.password;
@@ -376,31 +468,31 @@ handlers._users.get = function(data, callback) {
 // Users - put
 //required data: phone
 // optional data: firstName, lastName(at least one must be there)
-handlers._users.put = function(data, callback) {
+handlers._users.put = function (data, callback) {
     console.log('called')
     // check for required field
     var phone =
         typeof data.payload.phone == "string" &&
-        data.payload.phone.trim().length == 10 ?
-        data.payload.phone.trim() :
-        false;
+            data.payload.phone.trim().length == 10 ?
+            data.payload.phone.trim() :
+            false;
 
     //check for optional fields
     var firstName =
         typeof data.payload.firstName == "string" &&
-        data.payload.firstName.trim().length > 0 ?
-        data.payload.firstName.trim() :
-        false;
+            data.payload.firstName.trim().length > 0 ?
+            data.payload.firstName.trim() :
+            false;
     var lastName =
         typeof data.payload.lastName == "string" &&
-        data.payload.lastName.trim().length > 0 ?
-        data.payload.lastName.trim() :
-        false;
+            data.payload.lastName.trim().length > 0 ?
+            data.payload.lastName.trim() :
+            false;
     var password =
         typeof data.payload.password == "string" &&
-        data.payload.password.trim().length > 0 ?
-        data.payload.password.trim() :
-        false;
+            data.payload.password.trim().length > 0 ?
+            data.payload.password.trim() :
+            false;
 
     // error if phone is invalid
     if (phone) {
@@ -409,10 +501,10 @@ handlers._users.put = function(data, callback) {
             var token =
                 typeof data.headers.token == "string" ? data.headers.token : false;
             // verify given token is valid for phone#
-            handlers._tokens.verifyToken(token, phone, function(tokenIsValid) {
+            handlers._tokens.verifyToken(token, phone, function (tokenIsValid) {
                 if (tokenIsValid) {
                     // lookup user
-                    _data.read("users", phone, function(err, userData) {
+                    _data.read("users", phone, function (err, userData) {
                         if (!err && userData) {
                             // update the necessary fields
                             if (firstName) {
@@ -424,9 +516,8 @@ handlers._users.put = function(data, callback) {
                             if (password) {
                                 userData.hashedPassword = helpers.hash(password);
                             }
-                            _data.update("users", phone, userData, function(err) {
+                            _data.update("users", phone, userData, function (err) {
                                 if (!err) {
-                                    console.log('b4success')
                                     callback(200);
                                 } else {
                                     callback(500, { Err: "Could not update the user" });
@@ -450,37 +541,37 @@ handlers._users.put = function(data, callback) {
 
 // Users - delete
 // required field: phone
-handlers._users.delete = function(data, callback) {
+handlers._users.delete = function (data, callback) {
     //check that phone is valid
     var phone =
         typeof data.queryStringObject.phone == "string" &&
-        data.queryStringObject.phone.trim().length == 10 ?
-        data.queryStringObject.phone.trim() :
-        false;
+            data.queryStringObject.phone.trim().length == 10 ?
+            data.queryStringObject.phone.trim() :
+            false;
     if (phone) {
         var token =
             typeof data.headers.token == "string" ? data.headers.token : false;
         // verify given token is valid for phone#
-        handlers._tokens.verifyToken(token, phone, function(tokenIsValid) {
+        handlers._tokens.verifyToken(token, phone, function (tokenIsValid) {
             if (tokenIsValid) {
                 // lookup the user
-                _data.read("users", phone, function(err, userData) {
+                _data.read("users", phone, function (err, userData) {
                     if (!err && userData) {
-                        _data.delete("users", phone, function(err) {
+                        _data.delete("users", phone, function (err) {
                             if (!err) {
                                 //delete checks associated with user
                                 var userChecks =
                                     typeof userData.checks == "object" &&
-                                    userData.checks instanceof Array ?
-                                    userData.checks : [];
+                                        userData.checks instanceof Array ?
+                                        userData.checks : [];
                                 var checksToDelete = userChecks.length;
                                 if (checksToDelete > 0) {
                                     var checksDeleted = 0;
                                     var deletionErrors = false;
                                     //loop through checks
-                                    userChecks.forEach(function(checkId) {
+                                    userChecks.forEach(function (checkId) {
                                         //delete one check
-                                        _data.delete("checks", checkId, function(err) {
+                                        _data.delete("checks", checkId, function (err) {
                                             if (err) {
                                                 deletionErrors = true;
                                             } else {
@@ -520,7 +611,7 @@ handlers._users.delete = function(data, callback) {
 };
 
 // tokens handler
-handlers.tokens = function(data, callback) {
+handlers.tokens = function (data, callback) {
     var acceptableMethods = ["post", "get", "put", "delete"];
     if (acceptableMethods.indexOf(data.method) > -1) {
         handlers._tokens[data.method](data, callback);
@@ -536,22 +627,22 @@ handlers._tokens = {};
 // Tokens - Post
 // Required data: phone, password
 // optional: none
-handlers._tokens.post = function(data, callback) {
+handlers._tokens.post = function (data, callback) {
     var phone =
         typeof data.payload.phone == "string" &&
-        data.payload.phone.trim().length == 10 ?
-        data.payload.phone.trim() :
-        false;
+            data.payload.phone.trim().length == 10 ?
+            data.payload.phone.trim() :
+            false;
     var password =
         typeof data.payload.password == "string" &&
-        data.payload.password.trim().length > 0 ?
-        data.payload.password.trim() :
-        false;
+            data.payload.password.trim().length > 0 ?
+            data.payload.password.trim() :
+            false;
 
-        console.log('phone password checked')
+    console.log('phone password checked')
     if (phone && password) {
         // lookup the user who matches that phone number
-        _data.read("users", phone, function(err, userData) {
+        _data.read("users", phone, function (err, userData) {
             if (!err && userData) {
                 // Hash the sent password, and compare to the password stored
                 var hashedPassword = helpers.hash(password);
@@ -566,7 +657,7 @@ handlers._tokens.post = function(data, callback) {
                     };
 
                     // store the token
-                    _data.create("tokens", tokenId, tokenObject, function(err) {
+                    _data.create("tokens", tokenId, tokenObject, function (err) {
                         if (!err) {
                             callback(200, tokenObject);
                         } else {
@@ -576,9 +667,9 @@ handlers._tokens.post = function(data, callback) {
                 } else {
                     callback(400, { Error: "Password did not match the specified user" });
                 }
-            }else {
-                callback(400,{'Error' : 'Could not find the specified user.'});
-              }
+            } else {
+                callback(400, { 'Error': 'Could not find the specified user.' });
+            }
         });
     } else {
         callback(400, { Error: "Missing required field(s)" });
@@ -587,16 +678,16 @@ handlers._tokens.post = function(data, callback) {
 // Tokens - get
 // required data: id
 // optional data: none
-handlers._tokens.get = function(data, callback) {
+handlers._tokens.get = function (data, callback) {
     //check that the sent id is valid
     var id =
         typeof data.queryStringObject.id == "string" &&
-        data.queryStringObject.id.trim().length == 20 ?
-        data.queryStringObject.id.trim() :
-        false;
+            data.queryStringObject.id.trim().length == 20 ?
+            data.queryStringObject.id.trim() :
+            false;
     if (id) {
         // lookup the user
-        _data.read("tokens", id, function(err, tokenData) {
+        _data.read("tokens", id, function (err, tokenData) {
             if (!err && tokenData) {
                 //  Remove the hashed password from the user object b4 return the response
                 callback(200, tokenData);
@@ -612,23 +703,23 @@ handlers._tokens.get = function(data, callback) {
 // Tokens - put
 // required: id, extend
 //optional data: none
-handlers._tokens.put = function(data, callback) {
+handlers._tokens.put = function (data, callback) {
     var id =
         typeof data.payload.id == "string" && data.payload.id.trim().length == 20 ?
-        data.payload.id.trim() :
-        false;
+            data.payload.id.trim() :
+            false;
     var extend =
         typeof data.payload.extend == "boolean" && data.payload.extend == true ?
-        true :
-        false;
+            true :
+            false;
     if (id && extend) {
-        _data.read("tokens", id, function(err, tokenData) {
+        _data.read("tokens", id, function (err, tokenData) {
             if (!err && tokenData) {
                 //check to make sure the token isn't already expired
                 if (tokenData.expires > Date.now()) {
                     tokenData.expires = Date.now() + 1000 * 60 * 60;
                     //store the new updates
-                    _data.update("tokens", id, tokenData, function(err) {
+                    _data.update("tokens", id, tokenData, function (err) {
                         if (!err) {
                             callback(200);
                         } else {
@@ -656,18 +747,18 @@ handlers._tokens.put = function(data, callback) {
 // Tokens - delete
 //requires: id
 // optional: none
-handlers._tokens.delete = function(data, callback) {
+handlers._tokens.delete = function (data, callback) {
     //check that id is valid
     var id =
         typeof data.queryStringObject.id == "string" &&
-        data.queryStringObject.id.trim().length == 20 ?
-        data.queryStringObject.id.trim() :
-        false;
+            data.queryStringObject.id.trim().length == 20 ?
+            data.queryStringObject.id.trim() :
+            false;
     if (id) {
         // lookup the user
-        _data.read("tokens", id, function(err, data) {
+        _data.read("tokens", id, function (err, data) {
             if (!err && data) {
-                _data.delete("tokens", id, function(err) {
+                _data.delete("tokens", id, function (err) {
                     if (!err) {
                         callback(200);
                     } else {
@@ -684,9 +775,9 @@ handlers._tokens.delete = function(data, callback) {
 };
 
 // verify if a given token id is currently valid for a given user
-handlers._tokens.verifyToken = function(id, phone, callback) {
+handlers._tokens.verifyToken = function (id, phone, callback) {
     //lookup the token
-    _data.read("tokens", id, function(err, tokenData) {
+    _data.read("tokens", id, function (err, tokenData) {
         if (!err && tokenData) {
             if (tokenData.phone == phone && tokenData.expires > Date.now()) {
                 callback(true);
@@ -700,7 +791,7 @@ handlers._tokens.verifyToken = function(id, phone, callback) {
 };
 
 //checks handler
-handlers.checks = function(data, callback) {
+handlers.checks = function (data, callback) {
     var acceptableMethods = ["post", "get", "put", "delete"];
     if (acceptableMethods.indexOf(data.method) > -1) {
         handlers._checks[data.method](data, callback);
@@ -715,33 +806,33 @@ handlers._checks = {};
 // checks - post
 // required data: protocol, url, method, successCodes, timeoutSeconds
 // optional data: none
-handlers._checks.post = function(data, callback) {
+handlers._checks.post = function (data, callback) {
     // validate all inputs
     var protocol =
         typeof data.payload.protocol == "string" && ["https", "http"].indexOf(data.payload.protocol) > -1 ?
-        data.payload.protocol :
-        false;
+            data.payload.protocol :
+            false;
     var url =
         typeof data.payload.url == "string" && data.payload.url.trim().length > 0 ?
-        data.payload.url.trim() :
-        false;
+            data.payload.url.trim() :
+            false;
     var method =
         typeof data.payload.method == "string" && ["post", "get", "put", "delete"].indexOf(data.payload.method) > -1 ?
-        data.payload.method :
-        false;
+            data.payload.method :
+            false;
     var successCodes =
         typeof data.payload.successCodes == "object" &&
-        data.payload.successCodes instanceof Array &&
-        data.payload.successCodes.length > 0 ?
-        data.payload.successCodes :
-        false;
+            data.payload.successCodes instanceof Array &&
+            data.payload.successCodes.length > 0 ?
+            data.payload.successCodes :
+            false;
     var timeoutSeconds =
         typeof data.payload.timeoutSeconds == "number" &&
-        data.payload.timeoutSeconds % 1 === 0 &&
-        data.payload.timeoutSeconds >= 1 &&
-        data.payload.timeoutSeconds <= 5 ?
-        data.payload.timeoutSeconds :
-        false;
+            data.payload.timeoutSeconds % 1 === 0 &&
+            data.payload.timeoutSeconds >= 1 &&
+            data.payload.timeoutSeconds <= 5 ?
+            data.payload.timeoutSeconds :
+            false;
 
     if (protocol && url && successCodes && timeoutSeconds) {
         // get the token from the headers
@@ -749,17 +840,17 @@ handlers._checks.post = function(data, callback) {
             typeof data.headers.token == "string" ? data.headers.token : false;
 
         // lookup the user by reading the token
-        _data.read("tokens", token, function(err, tokenData) {
+        _data.read("tokens", token, function (err, tokenData) {
             if (!err && tokenData) {
                 var userPhone = tokenData.phone;
 
                 //lookup the user data
-                _data.read("users", userPhone, function(err, userData) {
+                _data.read("users", userPhone, function (err, userData) {
                     if (!err && userData) {
                         var userChecks =
                             typeof userData.checks == "object" &&
-                            userData.checks instanceof Array ?
-                            userData.checks : [];
+                                userData.checks instanceof Array ?
+                                userData.checks : [];
                         // verify the user has less than the number of max checks per user
                         if (userChecks.length < config.maxChecks) {
                             var checkId = helpers.createRandomString(20);
@@ -776,14 +867,14 @@ handlers._checks.post = function(data, callback) {
                             };
 
                             // save object
-                            _data.create("checks", checkId, checkObject, function(err) {
+                            _data.create("checks", checkId, checkObject, function (err) {
                                 if (!err) {
                                     // add the check id to the user's object
                                     userData.checks = userChecks;
                                     userData.checks.push(checkId);
 
                                     // save the new user data
-                                    _data.update("users", userPhone, userData, function(err) {
+                                    _data.update("users", userPhone, userData, function (err) {
                                         if (!err) {
                                             //return the data about new check
                                             callback(200, checkObject);
@@ -816,22 +907,22 @@ handlers._checks.post = function(data, callback) {
 // get for checks
 // required: id
 // optional: none
-handlers._checks.get = function(data, callback) {
+handlers._checks.get = function (data, callback) {
     // check that the provided phoneno is valid
     var id =
         typeof data.queryStringObject.id == "string" &&
-        data.queryStringObject.id.trim().length == 20 ?
-        data.queryStringObject.id.trim() :
-        false;
+            data.queryStringObject.id.trim().length == 20 ?
+            data.queryStringObject.id.trim() :
+            false;
     if (id) {
         // llookup the checks
-        _data.read("checks", id, function(err, checkData) {
+        _data.read("checks", id, function (err, checkData) {
             if (!err && checkData) {
                 // get token  from the header
                 var token =
                     typeof data.headers.token == "string" ? data.headers.token : false;
                 // verify given token is valid for phone#
-                handlers._tokens.verifyToken(token, checkData.userPhone, function(
+                handlers._tokens.verifyToken(token, checkData.userPhone, function (
                     tokenIsValid
                 ) {
                     if (tokenIsValid) {
@@ -855,52 +946,52 @@ handlers._checks.get = function(data, callback) {
 // checks - put
 // required data: id
 // optional data: protocol, url, method, successCodes, timeoutSeconds (at least 1 must be there)
-handlers._checks.put = function(data, callback) {
+handlers._checks.put = function (data, callback) {
     // check for required field
     var id =
         typeof data.payload.id == "string" && data.payload.id.trim().length == 20 ?
-        data.payload.id.trim() :
-        false;
+            data.payload.id.trim() :
+            false;
 
     //check for optional fields
     var protocol =
         typeof data.payload.protocol == "string" && ["https", "http"].indexOf(data.payload.protocol) > -1 ?
-        data.payload.protocol :
-        false;
+            data.payload.protocol :
+            false;
     var url =
         typeof data.payload.url == "string" && data.payload.url.trim().length > 0 ?
-        data.payload.url.trim() :
-        false;
+            data.payload.url.trim() :
+            false;
     var method =
         typeof data.payload.method == "string" && ["post", "get", "put", "delete"].indexOf(data.payload.method) > -1 ?
-        data.payload.method :
-        false;
+            data.payload.method :
+            false;
     var successCodes =
         typeof data.payload.successCodes == "object" &&
-        data.payload.successCodes instanceof Array &&
-        data.payload.successCodes.length > 0 ?
-        data.payload.successCodes :
-        false;
+            data.payload.successCodes instanceof Array &&
+            data.payload.successCodes.length > 0 ?
+            data.payload.successCodes :
+            false;
     var timeoutSeconds =
         typeof data.payload.timeoutSeconds == "number" &&
-        data.payload.timeoutSeconds % 1 === 0 &&
-        data.payload.timeoutSeconds >= 1 &&
-        data.payload.timeoutSeconds <= 5 ?
-        data.payload.timeoutSeconds :
-        false;
+            data.payload.timeoutSeconds % 1 === 0 &&
+            data.payload.timeoutSeconds >= 1 &&
+            data.payload.timeoutSeconds <= 5 ?
+            data.payload.timeoutSeconds :
+            false;
 
     // error if phone is invalid
     if (id) {
         // error if nothing sent
         if (protocol || url || method || successCodes || timeoutSeconds) {
             // lookup checks
-            _data.read("checks", id, function(err, checkData) {
+            _data.read("checks", id, function (err, checkData) {
                 if (!err && checkData) {
                     // get token  from the header
                     var token =
                         typeof data.headers.token == "string" ? data.headers.token : false;
                     // verify given token is valid for phone#
-                    handlers._tokens.verifyToken(token, checkData.userPhone, function(
+                    handlers._tokens.verifyToken(token, checkData.userPhone, function (
                         tokenIsValid
                     ) {
                         if (tokenIsValid) {
@@ -923,7 +1014,7 @@ handlers._checks.put = function(data, callback) {
                             }
 
                             //update
-                            _data.update("checks", id, checkData, function(err) {
+                            _data.update("checks", id, checkData, function (err) {
                                 if (!err) {
                                     callback(200);
                                 } else {
@@ -950,35 +1041,35 @@ handlers._checks.put = function(data, callback) {
 
 // id
 //optional : none
-handlers._checks.delete = function(data, callback) {
+handlers._checks.delete = function (data, callback) {
     //check that phone is valid
     var id =
         typeof data.queryStringObject.id == "string" &&
-        data.queryStringObject.id.trim().length == 20 ?
-        data.queryStringObject.id.trim() :
-        false;
+            data.queryStringObject.id.trim().length == 20 ?
+            data.queryStringObject.id.trim() :
+            false;
     if (id) {
-        _data.read("checks", id, function(err, checkData) {
+        _data.read("checks", id, function (err, checkData) {
             if (!err && checkData) {
                 var token =
                     typeof data.headers.token == "string" ? data.headers.token : false;
                 // verify given token is valid for phone#
-                handlers._tokens.verifyToken(token, checkData.userPhone, function(
+                handlers._tokens.verifyToken(token, checkData.userPhone, function (
                     tokenIsValid
                 ) {
                     if (tokenIsValid) {
                         // delete  the check
-                        _data.delete("checks", id, function(err) {
+                        _data.delete("checks", id, function (err) {
                             if (!err) {
-                                _data.read("users", checkData.userPhone, function(
+                                _data.read("users", checkData.userPhone, function (
                                     err,
                                     userData
                                 ) {
                                     if (!err && userData) {
                                         var userChecks =
                                             typeof userData.checks == "object" &&
-                                            userData.checks instanceof Array ?
-                                            userData.checks : [];
+                                                userData.checks instanceof Array ?
+                                                userData.checks : [];
 
                                         // remove the check from list of checks
                                         var checkPosition = userChecks.indexOf(id);
@@ -990,7 +1081,7 @@ handlers._checks.delete = function(data, callback) {
                                                 "users",
                                                 checkData.userPhone,
                                                 userData,
-                                                function(err) {
+                                                function (err) {
                                                     if (!err) {
                                                         callback(200);
                                                     } else {
@@ -1028,12 +1119,12 @@ handlers._checks.delete = function(data, callback) {
     }
 };
 // ping handler
-handlers.ping = function(data, callback) {
+handlers.ping = function (data, callback) {
     callback(200);
 };
 
 // not found handler
-handlers.notFound = function(data, callback) {
+handlers.notFound = function (data, callback) {
     callback(404);
 };
 
