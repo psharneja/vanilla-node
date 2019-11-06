@@ -18,9 +18,8 @@ handlers.index = function(data, callback) {
     if (data.method == "get") {
         //prepare data for interpolation
         var templateData = {
-            "head.title": "This is the title",
-            "head.description": "This is the meta description",
-            "body.title": "Hello templated world!",
+            "head.title": "This is the Uptime Monitoring, made simple!",
+            "head.description": "We offer free simple uptime monitoring for http/ http ssites of all kinds, will let u knoe when ur site goes down",
             "body.class": "index"
         };
 
@@ -45,7 +44,161 @@ handlers.index = function(data, callback) {
     }
 };
 
-//favicon hjandler
+handlers.accountCreate = function(data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Create an account",
+            "head.description": "signup is easy and only takes a few seconds",
+            "body.class": "accountCreate"
+        };
+
+        //read in a template as a string
+        helpers.getTemplate("accountCreate", templateData, function(err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
+    }
+}
+
+handlers.sessionCreate = function(data, callback) {
+    //reject request that isn't GET
+    if (data.method == "get") {
+        //prepare data for interpolation
+        var templateData = {
+            "head.title": "Login to your acccount",
+            "head.description": "please login ur phone no n password to login",
+            "body.class": "sessionCreate"
+        };
+
+        //read in a template as a string
+        helpers.getTemplate("sessionCreate", templateData, function(err, str) {
+            if (!err && str) {
+                //add the universal header n footer
+                helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                    if (!err && str) {
+                        //return as html
+                        callback(200, str, "html");
+                    } else {
+                        callback(500, undefined, "html");
+                    }
+                });
+            } else {
+                callback(500, undefined, "html");
+            }
+        });
+    } else {
+        callback(405, undefined, "html");
+    }
+}
+
+handlers.sessionDeleted = function(data, callback) {
+        //reject request that isn't GET
+        if (data.method == "get") {
+            //prepare data for interpolation
+            var templateData = {
+                "head.title": "Logged Out",
+                "head.description": "youve been logged out of your account",
+                "body.class": "sessionDeleted"
+            };
+
+            //read in a template as a string
+            helpers.getTemplate("sessionDeleted", templateData, function(err, str) {
+                if (!err && str) {
+                    //add the universal header n footer
+                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                        if (!err && str) {
+                            //return as html
+                            callback(200, str, "html");
+                        } else {
+                            callback(500, undefined, "html");
+                        }
+                    });
+                } else {
+                    callback(500, undefined, "html");
+                }
+            });
+        } else {
+            callback(405, undefined, "html");
+        }
+    }
+//edit account
+    handlers.accountEdit = function(data, callback) {
+        //reject request that isn't GET
+        if (data.method == "get") {
+            //prepare data for interpolation
+            var templateData = {
+                "head.title": "Account Settings",
+                "body.class": "accountEdit"
+            };
+
+            //read in a template as a string
+            helpers.getTemplate("accountEdit", templateData, function(err, str) {
+                if (!err && str) {
+                    //add the universal header n footer
+                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                        if (!err && str) {
+                            //return as html
+                            callback(200, str, "html");
+                        } else {
+                            callback(500, undefined, "html");
+                        }
+                    });
+                } else {
+                    callback(500, undefined, "html");
+                }
+            });
+        } else {
+            callback(405, undefined, "html");
+        }
+    }
+
+    //deleted account redirect to this page
+    handlers.accountDeleted = function(data, callback) {
+        //reject request that isn't GET
+        if (data.method == "get") {
+            //prepare data for interpolation
+            var templateData = {
+                "head.title": "Account Deleted",
+                "jhead.description": "Your account has been deleted",
+                "body.class": "accountDeleted"
+            };
+
+            //read in a template as a string
+            helpers.getTemplate("accountDeleted", templateData, function(err, str) {
+                if (!err && str) {
+                    //add the universal header n footer
+                    helpers.addUniversalTemplates(str, templateData, function(err, str) {
+                        if (!err && str) {
+                            //return as html
+                            callback(200, str, "html");
+                        } else {
+                            callback(500, undefined, "html");
+                        }
+                    });
+                } else {
+                    callback(500, undefined, "html");
+                }
+            });
+        } else {
+            callback(405, undefined, "html");
+        }
+    }
+    //favicon hjandler
 handlers.favicon = function(data, callback) {
     if (data.method == "get") {
         //read in the favicons data
@@ -224,6 +377,7 @@ handlers._users.get = function(data, callback) {
 //required data: phone
 // optional data: firstName, lastName(at least one must be there)
 handlers._users.put = function(data, callback) {
+    console.log('called')
     // check for required field
     var phone =
         typeof data.payload.phone == "string" &&
@@ -268,10 +422,11 @@ handlers._users.put = function(data, callback) {
                                 userData.lastName = lastName;
                             }
                             if (password) {
-                                userData.password = helpers.hash(password);
+                                userData.hashedPassword = helpers.hash(password);
                             }
                             _data.update("users", phone, userData, function(err) {
                                 if (!err) {
+                                    console.log('b4success')
                                     callback(200);
                                 } else {
                                     callback(500, { Err: "Could not update the user" });
@@ -393,6 +548,7 @@ handlers._tokens.post = function(data, callback) {
         data.payload.password.trim() :
         false;
 
+        console.log('phone password checked')
     if (phone && password) {
         // lookup the user who matches that phone number
         _data.read("users", phone, function(err, userData) {
@@ -420,7 +576,9 @@ handlers._tokens.post = function(data, callback) {
                 } else {
                     callback(400, { Error: "Password did not match the specified user" });
                 }
-            }
+            }else {
+                callback(400,{'Error' : 'Could not find the specified user.'});
+              }
         });
     } else {
         callback(400, { Error: "Missing required field(s)" });
